@@ -30,8 +30,8 @@ jobs:
           - name: release を作成して実行ファイルを公開
             run: |
                 .\r-gh-create-release `
-                    --file gh-release-storategy-example-1.exe `
-                    --file gh-release-storategy-example-1
+                    --file gh-release-strategy-example-1.exe `
+                    --file gh-release-strategy-example-1
             env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 
@@ -55,7 +55,7 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                 name: my-temporary-artifacts
-                path: target/release/gh-release-storategy-example-1.exe
+                path: target\release\gh-release-strategy-example-1.exe
             # DELETE ARTIFACTS
           - name: Delete artifacts
             run: |
@@ -80,4 +80,4 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                 name: my-temporary-artifacts
-                path: target/release/gh-release-storategy-example-1
+                path: target/release/gh-release-strategy-example-1
