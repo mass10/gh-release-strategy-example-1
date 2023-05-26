@@ -3,13 +3,14 @@ name: Create release to make .exe published.
 on:
     push:
         branches: [ "main" ]
+
     workflow_dispatch:
 
 jobs:
     # CREATE RELEASE AND UPLOAD EXECUTABLE FILE
     create-releases:
         runs-on: windows-latest
-        needs: [build-on-windows, build-on-ubuntu]
+        needs: [build-on-windows, build-on-linux]
         steps:
             # CHECKOUT REPOSITORY
           - name: Checkout
