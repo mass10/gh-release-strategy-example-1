@@ -37,7 +37,7 @@ jobs:
             # DELETE ARTIFACTS
           - name: Delete artifacts
             run: |
-                curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" -d "{\"name\":\"artifacts\"}"
+                curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" -d "{""name"":""artifacts""}"
                 
 
     # FOR WINDOWS
@@ -52,8 +52,6 @@ jobs:
             # BUILD APPLICATION FOR WINDOWS
           - name: Create the app package
             run: cargo.exe build --release
-            env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             # CREATE ARTIFACTS
           - name: Create Release
             uses: actions/upload-artifact@v3
@@ -73,8 +71,6 @@ jobs:
             # BUILD APPLICATION FOR WINDOWS
           - name: Create the app package
             run: cargo build --release
-            env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             # CREATE ARTIFACTS
           - name: Create Release
             uses: actions/upload-artifact@v3
