@@ -70,7 +70,9 @@ jobs:
                 fetch-depth: 1
             # BUILD APPLICATION FOR WINDOWS
           - name: Create the app package
-            run: cargo build --release --target x86_64-unknown-linux-gnu
+            run: |
+                cargo build --release --target x86_64-unknown-linux-gnu
+                cmd.exe /C DIR /S /B *.exe
             # CREATE ARTIFACTS
           - name: Create Release
             uses: actions/upload-artifact@v3
