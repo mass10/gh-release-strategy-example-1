@@ -72,7 +72,7 @@ jobs:
           - name: Create the app package
             run: |
                 cargo build --release --target x86_64-unknown-linux-gnu
-                find target/release/ -ls
+                find -ls
             # CREATE ARTIFACTS
           - name: Create Release
             uses: actions/upload-artifact@v3
