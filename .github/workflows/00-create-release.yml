@@ -34,6 +34,10 @@ jobs:
                     --file gh-release-strategy-example-1
             env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # DELETE ARTIFACTS
+          - name: Delete artifacts
+            run: |
+                curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" -d "{\"name\":\"artifacts\"}"
                 
 
     # FOR WINDOWS
@@ -56,10 +60,6 @@ jobs:
             with:
                 name: my-temporary-artifacts
                 path: target\release\gh-release-strategy-example-1.exe
-            # DELETE ARTIFACTS
-          - name: Delete artifacts
-            run: |
-                curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" -d "{\"name\":\"artifacts\"}"
 
     # FOR LINUX
     build-on-linux:
