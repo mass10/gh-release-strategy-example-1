@@ -30,8 +30,8 @@ jobs:
           - name: release を作成して実行ファイルを公開
             run: |
                 .\r-gh-create-release `
-                    --file target/gh-release-storategy-example-1.exe `
-                    --file target/gh-release-storategy-example-1
+                    --file gh-release-storategy-example-1.exe `
+                    --file gh-release-storategy-example-1
             env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 
@@ -55,7 +55,11 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                 name: my-temporary-artifacts
-                path: target/gh-release-storategy-example-1.exe
+                path: target/release/gh-release-storategy-example-1.exe
+            # DELETE ARTIFACTS
+          - name: Delete artifacts
+            run: |
+                curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" -d "{\"name\":\"artifacts\"}"
 
     # FOR LINUX
     build-on-linux:
@@ -76,4 +80,4 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                 name: my-temporary-artifacts
-                path: target/gh-release-storategy-example-1
+                path: target/release/gh-release-storategy-example-1
