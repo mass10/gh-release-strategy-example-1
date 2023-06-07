@@ -2,8 +2,10 @@ name: Create release to make .exe published.
 
 on:
     push:
+        # Any pushes on maion branch trigger this job.
         branches: [ "main" ]
 
+    # Can be triggerred on Web UI of GitHub.
     workflow_dispatch:
 
 jobs:
@@ -21,7 +23,7 @@ jobs:
             with:
                 fetch-depth: 1
             # DOWNLOAD CRATE
-          - name: crate をダウンロード
+          - name: download utility crate
             run: |
                 Invoke-WebRequest -Uri "https://github.com/mass10/r-gh-create-release/releases/latest/download/r-gh-create-release.exe" -OutFile "r-gh-create-release.exe"
             # DOWNLOAD ARTIFACTS
@@ -30,7 +32,7 @@ jobs:
             with:
                 name: my-temporary-artifacts
             # CREATE RELEASE AND UPLOAD EXECUTABLE FILE
-          - name: release を作成して実行ファイルを公開
+          - name: Create a release and publish attachments.
             run: |
                 .\r-gh-create-release `
                     --file gh-release-strategy-example-1.exe `
@@ -42,7 +44,6 @@ jobs:
             run: |
                 curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" -d "{""name"":""artifacts""}"
                 
-
     # FOR WINDOWS
     build-on-windows:
         runs-on: windows-latest
